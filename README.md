@@ -8,11 +8,26 @@ Esta configuración permitió observar las variaciones en la frecuencia media y 
 
 ### a. Colocar los electrodos sobre el grupo muscular definido por el grupo. 
 Se trabajó con el grupo muscular del antebrazo. Para ubicar bien los electrodos, se le pidió a la persona que hiciera una contracción del músculo, así se podía sentir dónde se movía más y decidir el mejor lugar para colocarlos. También se puso un electrodo de referencia en el codo.  
-https://www.sciencedirect.com/science/article/pii/S1388245719311782
+<img width="659" height="661" alt="image" src="https://github.com/user-attachments/assets/39ec9d0d-6254-45b9-9f8c-9b4c58775c80" />
+
 ### b. Registrar la señal EMG de un paciente o voluntario sano realizando contracciones repetidas hasta la fatiga (o la falla).  
 Se armó un circuito pequeño usando la ST-Link para alimentar el módulo AD8232. Los electrodos del módulo se colocaron en el antebrazo y se conectaron al DAQ para poder capturar la señal. A partir de ahí, se usó un programa en Python que permitía capturar, graficar y guardar la señal en tiempo real.  
 ## PEGAR CIRCUITO  
+Usamos un programa en Python para manejar todo el proceso. Al principio se importaron las bibliotecas necesarias para poder programar y obtener la información desde el DAQ. Estas librerías permitieron establecer la conexión, capturar los datos, graficarlos y guardarlos en tiempo real    
+         import nidaqmx
+         from nidaqmx.constants import AcquisitionType
+         import numpy as np
+         import matplotlib.pyplot as plt
+         import time  
 
+Luego se ajustaron los parámetros de la señal que se iba a almacenar. Se configuró la frecuencia de muestreo, el canal al que estaba conectado al DAQ, y cuántas muestras se iban a obtener, y se indicó que el buffer iba a acumular datos durante 5 segundos. También se declaró una variable tipo vector para guardar esos datos, y se lleva un registro del tiempo para saber cuándo se inicia la captura.  
+         frecuencia_muestreo = 5000       
+         canal_daq = "Dev5/ai0"           
+         muestras_por_bloque = 500        
+         tiempo_buffer = 5                 
+
+         datos_capturados = []        
+         inicio = time.time()              
 
 
 
