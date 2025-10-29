@@ -1,5 +1,12 @@
 # Laboratorio-4-procesamiento-de-señales
 Entrega 4 laboratorio de procesamiento 
+
+# Parte B  
+En esta parte del laboratorio se realizó la adquisición de una señal electromiográfica (EMG) real en la zona del antebrazo, con el fin de analizar la actividad eléctrica producida por la contracción muscular y su relación con la fatiga. Para ello, se ubicaron dos electrodos de superficie en el antebrazo y un electrodo de referencia en el codo, se aseguro que la piel estuviera limpia. La señal fue registrada mediante un sistema de adquisición en phyton que permitia graficar y a su vez guardar la señal, se uso una frecuencia de muestreo de 5 kHz, valor adecuado para este tipo de registros según lo reportado en la literatura, ya que permite captar de forma precisa el rango de frecuencias característico de las señales EMG de superficie (generalmente entre 20 Hz y 450 Hz) (Wegrzyk et al., 2020).  
+
+Esta configuración permitió observar las variaciones en la frecuencia media y mediana a lo largo de contracciones sucesivas, las cuales reflejan los cambios fisiológicos asociados a la fatiga muscular, como la disminución la variación en la conducción eléctrica. El análisis de estos parámetros, junto con el uso de filtros adecuados, facilita la interpretación de la señal en el dominio de la frecuencia y su vinculación con la actividad muscular real.  
+
+
 # Parte C
 
 En esta parte del laboratorio se realizó el análisis espectral de la señal EMG real obtenida del grupo muscular del antebrazo, con el fin de estudiar la evolución del contenido de frecuencia durante una serie de 53 contracciones musculares.
@@ -151,5 +158,7 @@ Este tipo de análisis permite identificar con claridad la disminución de las c
 En general, el uso del análisis espectral facilita la interpretación de las señales EMG y puede servir como apoyo en el diagnóstico y seguimiento de la actividad muscular tanto en estudios clínicos como experimentales.
 
 
-
+# Referencias
+- Wegrzyk, J., Fouré, A., Vilmen, C., Maffiuletti, N. A., Mattei, J. P., Place, N., & Bendahan, D. (2020). Fatigue-related adaptations in muscle activity and metabolism during high-intensity intermittent exercise: A combined electromyographic and ^31P-MRS study. Neurophysiologie Clinique/Clinical Neurophysiology, 50(4), 301–312. https://doi.org/10.1016/j.neucli.2019.11.002
+- 
 
