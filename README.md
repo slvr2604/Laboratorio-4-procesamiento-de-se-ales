@@ -29,9 +29,52 @@ Luego se ajustaron los parámetros de la señal que se iba a almacenar. Se confi
          tiempo_buffer = 5                 
 
          datos_capturados = []        
-         inicio = time.time()              
+         inicio = time.time()    
+
+Después se crea una tarea de adquisición con nidaqmx.Task() y se abre con with, lo que garantiza que se cierre correctamente al finalizar. Dentro de la tarea, se añade un canal analógico de voltaje (add_ai_voltage_chan) usando el nombre definido en canal_daq, que corresponde al canal físico del DAQ donde está conectado el módulo. Luego se configura el reloj de muestreo con cfg_samp_clk_timing, estableciendo la frecuencia (frecuencia_muestreo) y el modo de adquisición como continuo (AcquisitionType.CONTINUOUS), lo que permite capturar datos sin interrupciones. Se ajusta el tamaño del buffer de entrada (input_buf_size) para que pueda almacenar la cantidad de muestras correspondientes a 5 segundos, calculado como frecuencia_muestreo * tiempo_buffer.
+
+Después, se imprime un mensaje indicando que la adquisición ha comenzado. Dentro del bloque try, se inicia un ciclo infinito (while True) que lee bloques de datos del DAQ usando tarea.read, con el tamaño definido en muestras_por_bloque, y los agrega a la lista datos_capturados mediante extend. Si el usuario interrumpe el proceso (por ejemplo, con Ctrl + C), se captura la excepción KeyboardInterrupt y se muestra un mensaje. Finalmente, en el bloque finally, se calcula el tiempo total de adquisición restando el tiempo inicial (inicio = time.time()) al tiempo actual, y se imprime en pantalla.  
+
+    with nidaqmx.Task() as tarea:
+       tarea.ai_channels.add_ai_voltage_chan(canal_daq)
+       tarea.timing.cfg_samp_clk_timing(
+        freq=frecuencia_muestreo,
+        sample_mode=AcquisitionType.CONTINUOUS
+    )
+    tarea.in_stream.input_buf_size = int(frecuencia_muestreo * tiempo_buffer)
+
+    print("Iniciando adquisición continua... (Ctrl + C para finalizar)")
+    try:
+        while True:
+            bloque = tarea.read(number_of_samples_per_channel=muestras_por_bloque)
+            datos_capturados.extend(bloque)
+    except KeyboardInterrupt:
+        print("\nAdquisición interrumpida por el usuario.")
+    finally:
+        tiempo_total = time.time() - inicio
+        print(f"Tiempo total de adquisición: {tiempo_total:.2f} segundos")  
+
+Primero, los datos capturados se convierten en un arreglo de tipo NumPy con np.array(datos_capturados), lo que permite trabajar con ellos de forma más eficiente. Luego se genera un vector de tiempo llamado tiempo, que va desde 0 hasta la duración total de la señal, calculado como el número de muestras dividido por la frecuencia de muestreo. Este vector sirve para asociar cada muestra con su instante correspondiente en segundos.  
+
+Después se crea una figura con tamaño personalizado (figsize=(10, 4)) y se grafica la señal usando plt.plot, donde el eje X representa el tiempo y el eje Y la amplitud en voltios. Se añaden etiquetas a los ejes, un título descriptivo ("Registro EMG - Adquisición con DAQ NI") y una cuadrícula para facilitar la lectura. Finalmente, se ajusta el diseño con tight_layout() y se muestra el gráfico en pantalla con plt.show().  
 
 
+         datos_capturados = np.array(datos_capturados)
+         tiempo = np.arange(0, len(datos_capturados)) / frecuencia_muestreo
+
+         plt.figure(figsize=(10, 5))
+         plt.plot(tiempo, datos_capturados, color='steelblue')
+         plt.xlabel("Tiempo [s]")
+         plt.ylabel("Amplitud [V]")
+         plt.title("Registro EMG")
+         plt.grid(True)
+         plt.show()
+
+Finalmente se define la ruta donde se va a guardar el archivo de texto con los datos capturados, usando una cadena formateada (f"") que incluye la frecuencia de muestreo en el nombre del archivo para identificarlo fácilmente. Luego, con np.savetxt, se guarda el arreglo datos_capturados en esa ruta como un archivo .txt. Finalmente, se imprime en consola un mensaje que confirma que el archivo fue guardado correctamente, mostrando la ruta completa.
+
+         ruta_guardado = f"C:/Users/carlo/.spyder-py3/RegistroEMG_{frecuencia_muestreo}.txt"
+         np.savetxt(ruta_guardado, datos_capturados)
+         print(f"Archivo guardado en: {ruta_guardado}")
 
 
 # Parte C
