@@ -6,6 +6,16 @@ En esta parte del laboratorio se realizó la adquisición de una señal electrom
 
 Esta configuración permitió observar las variaciones en la frecuencia media y mediana a lo largo de contracciones sucesivas, las cuales reflejan los cambios fisiológicos asociados a la fatiga muscular, como la disminución la variación en la conducción eléctrica. El análisis de estos parámetros, junto con el uso de filtros adecuados, facilita la interpretación de la señal en el dominio de la frecuencia y su vinculación con la actividad muscular real.  
 
+### a. Colocar los electrodos sobre el grupo muscular definido por el grupo. 
+Se trabajó con el grupo muscular del antebrazo. Para ubicar bien los electrodos, se le pidió a la persona que hiciera una contracción del músculo, así se podía sentir dónde se movía más y decidir el mejor lugar para colocarlos. También se puso un electrodo de referencia en el codo.  
+https://www.sciencedirect.com/science/article/pii/S1388245719311782
+### b. Registrar la señal EMG de un paciente o voluntario sano realizando contracciones repetidas hasta la fatiga (o la falla).  
+Se armó un circuito pequeño usando la ST-Link para alimentar el módulo AD8232. Los electrodos del módulo se colocaron en el antebrazo y se conectaron al DAQ para poder capturar la señal. A partir de ahí, se usó un programa en Python que permitía capturar, graficar y guardar la señal en tiempo real.  
+## PEGAR CIRCUITO  
+
+
+
+
 
 # Parte C
 
