@@ -29,7 +29,7 @@ En esta etapa se aplicó la Transformada Rápida de Fourier (FFT) a cada una de 
 Este procedimiento permitió obtener la representación de la señal en el dominio de la frecuencia, donde se identifican las componentes armónicas de la actividad muscular.
 Los resultados obtenidos a partir de esta transformación se presentan en la siguiente sección (parte b), mediante los espectros de amplitud correspondientes a diferentes contracciones.
 
-## b. Espectro de amplitud
+### b. Espectro de amplitud
 
     import matplotlib.pyplot as plt
 
@@ -58,7 +58,7 @@ Este comportamiento es característico de una señal EMG de contracción muscula
 La disminución de la magnitud a medida que aumenta la frecuencia indica que las componentes de alta frecuencia tienen menor presencia, lo cual es esperable en una señal biológica.
 En general, la gráfica confirma que la señal procesada mediante la FFT presenta un contenido espectral coherente con la actividad muscular real.
 
-## c. Comparación entre las primeras y las últimas contracciones
+### c. Comparación entre las primeras y las últimas contracciones
 
 En esta parte se ejecutó en Google Colab un bloque de código que compara los espectros de amplitud obtenidos mediante la Transformada Rápida de Fourier (FFT) para la primera y la última contracción de la señal EMG.
 
@@ -99,14 +99,14 @@ Se observa que la primera contracción posee una mayor energía y un pico de fre
 Esta variación indica una reducción del contenido de alta frecuencia, fenómeno directamente asociado con la aparición de fatiga muscular.
 A medida que el músculo se fatiga, la velocidad de conducción de las fibras se reduce y las unidades motoras se activan de manera más lenta, lo cual se refleja en un desplazamiento del espectro hacia frecuencias menores.
 
-## d. Reducción del contenido de alta frecuencia
+### d. Reducción del contenido de alta frecuencia
 
 A medida que avanzaron las contracciones, se observó una disminución progresiva del contenido de alta frecuencia en los espectros obtenidos mediante la FFT.
 Este efecto está directamente asociado con la fatiga muscular, ya que durante el esfuerzo sostenido disminuye la velocidad de conducción de las fibras musculares y la activación de las unidades motoras rápidas.
 Como resultado, la energía del espectro se concentra en frecuencias más bajas y la magnitud general de la señal disminuye.
 Este comportamiento confirma que la pérdida de componentes de alta frecuencia es un indicador confiable del inicio de la fatiga en el músculo analizado.
 
-## e. Desplazamiento del pico espectral
+### e. Desplazamiento del pico espectral
 
 En Google Colab se ejecutó un bloque de código encargado de calcular la frecuencia pico de cada contracción individual y analizar su variación a lo largo del tiempo.
 
@@ -143,7 +143,7 @@ Al inicio del registro, la frecuencia pico fue de aproximadamente 45.88 Hz, mien
 Este comportamiento confirma la presencia de fatiga muscular progresiva en el grupo muscular analizado.
 En conjunto, esta gráfica evidencia de forma cuantitativa cómo la energía de la señal EMG se desplaza hacia frecuencias más bajas conforme aumenta el número de contracciones, validando la interpretación de la fatiga a partir del análisis espectral.
 
-## f. Conclusiones sobre el uso del análisis espectral como herramienta diagnóstica en electromiografía
+### f. Conclusiones sobre el uso del análisis espectral como herramienta diagnóstica en electromiografía
 
 El análisis espectral resultó ser una herramienta muy útil para estudiar el comportamiento de la señal electromiográfica.
 A través de la Transformada Rápida de Fourier (FFT) fue posible observar cómo cambia el contenido de frecuencia del músculo durante las contracciones y cómo estos cambios reflejan la presencia de fatiga muscular.
