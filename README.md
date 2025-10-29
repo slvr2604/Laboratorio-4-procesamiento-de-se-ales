@@ -1,4 +1,4 @@
-# Laboratorio-4-procesamiento-de-se-ales
+# Laboratorio-4-procesamiento-de-señales
 Entrega 4 laboratorio de procesamiento 
 # Parte C
 
