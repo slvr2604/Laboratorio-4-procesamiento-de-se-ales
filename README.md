@@ -76,6 +76,9 @@ Finalmente se define la ruta donde se va a guardar el archivo de texto con los d
          np.savetxt(ruta_guardado, datos_capturados)
          print(f"Archivo guardado en: {ruta_guardado}")
 
+La señal obtenida fue esta, se hizo un zoom ya que no era claro verla:
+<img width="1020" height="470" alt="image" src="https://github.com/user-attachments/assets/5470ca23-0ffa-41a7-880b-03fc6b9042d6" />
+
 
 # Parte C
 
