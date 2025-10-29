@@ -14,6 +14,7 @@ Se trabajó con el grupo muscular del antebrazo. Para ubicar bien los electrodos
 Se armó un circuito pequeño usando la ST-Link para alimentar el módulo AD8232. Los electrodos del módulo se colocaron en el antebrazo y se conectaron al DAQ para poder capturar la señal. A partir de ahí, se usó un programa en Python que permitía capturar, graficar y guardar la señal en tiempo real.  
 ## PEGAR CIRCUITO  
 Usamos un programa en Python para manejar todo el proceso. Al principio se importaron las bibliotecas necesarias para poder programar y obtener la información desde el DAQ. Estas librerías permitieron establecer la conexión, capturar los datos, graficarlos y guardarlos en tiempo real    
+
          import nidaqmx
          from nidaqmx.constants import AcquisitionType
          import numpy as np
@@ -21,6 +22,7 @@ Usamos un programa en Python para manejar todo el proceso. Al principio se impor
          import time  
 
 Luego se ajustaron los parámetros de la señal que se iba a almacenar. Se configuró la frecuencia de muestreo, el canal al que estaba conectado al DAQ, y cuántas muestras se iban a obtener, y se indicó que el buffer iba a acumular datos durante 5 segundos. También se declaró una variable tipo vector para guardar esos datos, y se lleva un registro del tiempo para saber cuándo se inicia la captura.  
+
          frecuencia_muestreo = 5000       
          canal_daq = "Dev5/ai0"           
          muestras_por_bloque = 500        
