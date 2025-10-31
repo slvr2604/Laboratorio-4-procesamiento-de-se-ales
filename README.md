@@ -1,6 +1,47 @@
 # Laboratorio-4-procesamiento-de-señales
 Entrega 4 laboratorio de procesamiento 
 
+
+En el presente laboratorio se realizó la captura de señales electromiográficas con el propósito de observar cómo cambia la actitud muscular al realizar contracciones hasta finalizar con el fallo muscular. El EMG permitirá observar como se activa el musculo y como es el funcionamiento fisiológico de este. La práctica se desarrollo tanto con señales simuladas como con señales medidas con un sensor AD8232 que fue colocado en el antebrazo, a estas señales se les realizó el debido procesamiento y análisis para entender las características relacionadas con su frecuencia y evolución con el aumento de la fatiga muscular. Adicionalmente, se le realizó un análisis espectral a través de la Transformada Rápida de Fourier (FFT) que permitió observar los cambios de frecuencia en las contracciones, lo que permite analizar las diferencias entre las primeras y las últimas contracciones. Esto nos permitió comprender como las señales EMG nos muestran el comportamiento fisiológico del músculo cuando se realiza un esfuerzo y el análisis en el dominio de la frecuencia nos permite estudiar la fatiga y el rendimiento muscular.
+
+#Diagrama de flujo.
+Como primera etapa, se elaboró un diagrama de flujo que permitió estructurar tanto la programación como el procedimiento general del análisis. Esta herramienta facilitó la organización lógica de las tareas, definiendo el orden de ejecución, las funciones necesarias y los criterios de procesamiento que se aplicarían a las señales vocales.
+
+*Insertar diagrama de flujo*
+#Parte A.
+La parte A se centró inicialmente en la adquisición y procesamiento de una señal de contracciones musculares simuladas, se adquirieron 5 contracciones a las cuales se les realizó el siguiente procedimiento:
+
+
+Tras la adquisición y carga de la señal en Google Colab, se realizó un centrado a la señal, y adicionalmente una conversión a milivoltios, lo que nos permitió graficarla completa, con la siguiente programación.
+
+```
+t = data[:, 0]
+senal = data[:, 1]
+
+# Eliminamos el offset (centrar la señal)
+senal_centrada = senal - np.mean(senal)
+
+# Convertimos a milivoltios
+senal_mV = senal_centrada * 1000
+
+# Graficamos la señal completa.
+plt.figure(figsize=(12, 5))
+plt.plot(t, senal_mV, color='navy', linewidth=1)
+plt.xlabel('Tiempo [s]', fontsize=12)
+plt.ylabel('Amplitud [mV]', fontsize=12)
+plt.title('Señal EMG adquirida con la DAQ (centrada)', fontsize=14)
+plt.grid(True, linestyle='--', alpha=0.6)
+plt.ticklabel_format(axis='y', style='plain')
+plt.tight_layout()
+plt.show()
+```
+Finalmente la gráfica de la señal se observará de la siguiente forma:
+<img width="1189" height="490" alt="image" src="https://github.com/user-attachments/assets/31a397dc-db44-4332-b1e9-9adb0bab4fc0" />
+Donde se observa una contracción por segundo.
+
+
+
+
 # Parte B  
 En esta parte del laboratorio se realizó la adquisición de una señal electromiográfica (EMG) real en la zona del antebrazo, con el fin de analizar la actividad eléctrica producida por la contracción muscular y su relación con la fatiga. Para ello, se ubicaron dos electrodos de superficie en el antebrazo y un electrodo de referencia en el codo, se aseguro que la piel estuviera limpia. La señal fue registrada mediante un sistema de adquisición en phyton que permitia graficar y a su vez guardar la señal, se uso una frecuencia de muestreo de 5 kHz, valor adecuado para este tipo de registros según lo reportado en la literatura, ya que permite captar de forma precisa el rango de frecuencias característico de las señales EMG de superficie (generalmente entre 20 Hz y 450 Hz) (Wegrzyk et al., 2020).  
 
