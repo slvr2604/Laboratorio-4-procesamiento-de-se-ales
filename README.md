@@ -317,5 +317,5 @@ En general, el uso del análisis espectral facilita la interpretación de las se
 
 # Referencias
 - Wegrzyk, J., Fouré, A., Vilmen, C., Maffiuletti, N. A., Mattei, J. P., Place, N., & Bendahan, D. (2020). Fatigue-related adaptations in muscle activity and metabolism during high-intensity intermittent exercise: A combined electromyographic and ^31P-MRS study. Neurophysiologie Clinique/Clinical Neurophysiology, 50(4), 301–312. https://doi.org/10.1016/j.neucli.2019.11.002
-- 
+- Naeije, M., & Zorn, H. (1982). Relation between EMG power spectrum shifts and muscle fibre action potential conduction velocity changes during local muscular fatigue in man. European Journal of Applied Physiology and Occupational Physiology, 50, 23-33. https://doi.org/10.1007/BF00952241  
 
