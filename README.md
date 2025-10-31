@@ -75,11 +75,11 @@ Dentro de este ciclo, se aplicó la función `welch()` de la librería `scipy.si
 Con estos datos, se calculó la frecuencia media como un promedio ponderado entre las frecuencias y su potencia espectral.
 Luego, se calculó la frecuencia mediana tomando en cuenta la frecuencia en la que la suma acumulativa de la potencia alcanza el 50% del total del espectro. Este punto hace que se divida el área espectral en dos partes iguales, mostrando cómo se distribuye la energía de la señal.
 Una vez analizado el código, nos arroja la tabla de frecuencia media y frecuencia mediana y además la gráfica de estas.
-<img width="686" height="394" alt="image" src="https://github.com/user-attachments/assets/78d0f093-1b61-4944-8e7f-37b57395b13b" />
-
 
 <img width="623" height="232" alt="image" src="https://github.com/user-attachments/assets/0ee8a128-20f9-4518-aea7-a231782ddfe7" />
 
+
+<img width="686" height="394" alt="image" src="https://github.com/user-attachments/assets/78d0f093-1b61-4944-8e7f-37b57395b13b" />
 
 En la tabla se observan los valores obtenidos de frecuencia media y frecuencia mediana para las cinco contracciones musculares simuladas. Se puede observar que ambas frecuencias muestran una tendencia ascendente a medida que avanzan las contracciones. La frecuencia media inicia con un valor de aproximadamente 36.62 Hz en la primera contracción y aumenta hasta 67.41 Hz en la quinta. Esto indica que, conforme se repiten las contracciones, el contenido energético de la señal tiende a desplazarse hacia frecuencias más altas, lo que nos sugiere una mayor activación o intensidad muscular en las contracciones finales. A su vez, la frecuencia mediana pasa de 5.86 Hz en las dos primeras contracciones a 14.65 Hz en la última. Aunque los valores son menores que los de la frecuencia media, el incremento también refleja un desplazamiento del espectro hacia frecuencias más altas. Este comportamiento nos indica que es coherente con el hecho de que fue medida con un generador biológico, el cual simula mayor actividad muscular en las contracciones finales que en una medición real se asocia con la fatiga muscular.
 
