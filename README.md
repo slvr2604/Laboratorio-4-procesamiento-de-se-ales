@@ -37,7 +37,7 @@ plt.show()
 ```
 Finalmente la gráfica de la señal se observará de la siguiente forma:
 <img width="1189" height="490" alt="image" src="https://github.com/user-attachments/assets/31a397dc-db44-4332-b1e9-9adb0bab4fc0" />
-Donde se observa una contracción por segundo.
+Donde se observa una contracción por segundo. Y procedemos con el procesamiento de la señal, donde usaremos librerías como `numpy`, `matplotlib.pyplot` y `pandas`.
 
 
 
