@@ -4,11 +4,11 @@ Entrega 4 laboratorio de procesamiento
 
 En el presente laboratorio se realizó la captura de señales electromiográficas con el propósito de observar cómo cambia la actitud muscular al realizar contracciones hasta finalizar con el fallo muscular. El EMG permitirá observar como se activa el musculo y como es el funcionamiento fisiológico de este. La práctica se desarrollo tanto con señales simuladas como con señales medidas con un sensor AD8232 que fue colocado en el antebrazo, a estas señales se les realizó el debido procesamiento y análisis para entender las características relacionadas con su frecuencia y evolución con el aumento de la fatiga muscular. Adicionalmente, se le realizó un análisis espectral a través de la Transformada Rápida de Fourier (FFT) que permitió observar los cambios de frecuencia en las contracciones, lo que permite analizar las diferencias entre las primeras y las últimas contracciones. Esto nos permitió comprender como las señales EMG nos muestran el comportamiento fisiológico del músculo cuando se realiza un esfuerzo y el análisis en el dominio de la frecuencia nos permite estudiar la fatiga y el rendimiento muscular.
 
-#Diagrama de flujo.
+# Diagrama de flujo.
 Como primera etapa, se elaboró un diagrama de flujo que permitió estructurar tanto la programación como el procedimiento general del análisis. Esta herramienta facilitó la organización lógica de las tareas, definiendo el orden de ejecución, las funciones necesarias y los criterios de procesamiento que se aplicarían a las señales vocales.
 
 *Insertar diagrama de flujo*
-#Parte A.
+# Parte A.
 La parte A se centró inicialmente en la adquisición y procesamiento de una señal de contracciones musculares simuladas, se adquirieron 5 contracciones a las cuales se les realizó el siguiente procedimiento:
 
 
