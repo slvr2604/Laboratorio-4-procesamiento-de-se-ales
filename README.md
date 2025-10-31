@@ -318,7 +318,11 @@ El desplazamiento del espectro hacia frecuencias más bajas implica que el músc
 
 
 ### g. Discutir la relación entre los cambios de frecuencia y la fisiología de la fatiga muscular.  
+En las primeras contracciones, las frecuencias medias y medianas son más altas, lo que refleja una activación eficiente de las unidades motoras rápidas (fibras tipo II), que generan potenciales de acción de mayor frecuencia. A medida que las contracciones se repiten, se evidencia una reducción continua de frecuencia altas en el espectro de la señal. Este comportamiento se asocia directamente con la aparición de fatiga muscular, ya que el músculo comienza a perder eficiencia eléctrica y mecánica.  
 
+Cuando un músculo se somete a esfuerzos repetidos, la conducción eléctrica a través de las fibras musculares disminuye, debido a la reducción en la velocidad de propagación del potencial de acción. Esto ocurre por la acumulación de metabolitos como lactato, iones de hidrógeno y potasio, que alteran la excitabilidad de la membrana y reducen la eficacia de la contracción. Como consecuencia, las fibras rápidas que generan señales con mayor contenido en frecuencias altas pierden participación, mientras que las fibras lentas, con una frecuencia de disparo menor, predominan en la actividad muscular. Este cambio en el reclutamiento de unidades motoras se refleja en el espectro de la señal EMG, donde la energía se desplaza hacia frecuencias más bajas conforme el músculo se fatiga.
+
+En las gráficas las primeras contracciones presentan frecuencias medias cercanas a los 100–120 Hz, mientras que en las últimas caen por debajo de los 80 Hz, lo que confirma el desplazamiento espectral hacia bajas frecuencias. En resumen, la disminución de la frecuencia media y mediana observada a lo largo de las 53 contracciones confirma la presencia de fatiga muscular, ya que evidencia la disminución de la conducción muscular y la pérdida de eficiencia contráctil. Este comportamiento coincide con los patrones descritos en estudios de electromiografía de superficie para condiciones de esfuerzo prolongado.  
 
 # Parte C
 
