@@ -161,7 +161,7 @@ La señal obtenida fue esta, se hizo zoom entre el segundo 20-22 para tener una 
 <img width="1478" height="353" alt="image" src="https://github.com/user-attachments/assets/2fc59bd6-8728-4286-ada1-cb215cf08474" />
 
 ### c. Aplicar un filtro pasa banda (20–450 Hz) para eliminar ruido y artefactos  
-Primero se definió la frecuencia de muestreo de la señal EMG DE 5kHz. A partir de esto, se generó un vector de tiempo que permite asociar cada muestra con su instante correspondiente, facilitando el análisis de la señal.
+Primero se definió la frecuencia de muestreo de la señal EMG de 5kHz. A partir de esto, se generó un vector de tiempo que permite asociar cada muestra con su instante correspondiente, facilitando el análisis de la señal.
 
 Luego se diseñó el filtro pasabanda con el objetivo de conservar únicamente las frecuencias entre 20 Hz y 450 Hz, que son las más representativas de la actividad muscular. Para ello, se normalizaron las frecuencias de corte con respecto a la frecuencia de Nyquist y se utilizó un filtro Butterworth de cuarto orden, conocido por su respuesta suave y estable.  
 
@@ -207,7 +207,7 @@ Finalmente se graficó la respuesta del filtro pasabanda Butterworth en distinta
 
 
 ### d. Dividir la señal en el número de contracciones realizadas.  
-El total de contracciones fueron 53 en 75.1 segundos, la persona a la que se le tomó el exámen se le pidió apretas una botella hasta que tuviera fatiga, se graficaron todas las contracciones, pero se pondran las primeras 3 contracciones, una del medio y las tres últimas:  
+El total de contracciones fueron 53 en 75.1 segundos, la persona a la que se le tomó el exámen se le pidió apretar una botella hasta que tuviera fatiga, se graficaron todas las contracciones, pero se pondran las primeras 3 contracciones, una del medio y las tres últimas:  
 
     fs = 5000    
     duracion_total = 75.1
@@ -250,7 +250,7 @@ El total de contracciones fueron 53 en 75.1 segundos, la persona a la que se le 
 
 ### e. Calcular para cada contracción:  
 - Frecuencia media  
-- Frecuencia mediana
+- Frecuencia mediana  
 
         fs = 5000 
         n_contracciones = 53 
@@ -301,9 +301,14 @@ El total de contracciones fueron 53 en 75.1 segundos, la persona a la que se le 
 
         print(f"Promedio frecuencia media: {np.mean(frecuencias_medias):.2f} Hz")
         print(f"Promedio frecuencia mediana: {np.mean(frecuencias_medianas):.2f} Hz")
-<img width="841" height="471" alt="image" src="https://github.com/user-attachments/assets/d92cf826-ff16-4187-85e6-7e43c35e6dcf" />
+<img width="841" height="471" alt="image" src="https://github.com/user-attachments/assets/d92cf826-ff16-4187-85e6-7e43c35e6dcf" />  
 **Promedio frecuencia media:** 43.42 Hz  
 **Promedio frecuencia mediana:** 42.84 Hz  
+
+### Graficar los resultados obtenidos y analizar la tendencia de la frecuencia media y mediana a medida que progresa la fatiga muscular.  
+
+
+### Discutir la relación entre los cambios de frecuencia y la fisiología de la fatiga muscular.  
 
 # Parte C
 
