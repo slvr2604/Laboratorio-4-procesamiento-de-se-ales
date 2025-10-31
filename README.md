@@ -95,7 +95,7 @@ Se trabajó con el grupo muscular del antebrazo. Para ubicar bien los electrodos
 
 ### b. Registrar la señal EMG de un paciente o voluntario sano realizando contracciones repetidas hasta la fatiga (o la falla).  
 Se armó un circuito pequeño usando la ST-Link para alimentar el módulo AD8232. Los electrodos del módulo se colocaron en el antebrazo y se conectaron al DAQ para poder capturar la señal. A partir de ahí, se usó un programa en Python que permitía capturar, graficar y guardar la señal en tiempo real.  
-## PEGAR CIRCUITO  
+
 Usamos un programa en Python para manejar todo el proceso. Al principio se importaron las bibliotecas necesarias para poder programar y obtener la información desde el DAQ. Estas librerías permitieron establecer la conexión, capturar los datos, graficarlos y guardarlos en tiempo real    
 
          import nidaqmx
@@ -114,9 +114,9 @@ Luego se ajustaron los parámetros de la señal que se iba a almacenar. Se confi
          datos_capturados = []        
          inicio = time.time()    
 
-Después se crea una tarea de adquisición con nidaqmx.Task() y se abre con with, lo que garantiza que se cierre correctamente al finalizar. Dentro de la tarea, se añade un canal analógico de voltaje (add_ai_voltage_chan) usando el nombre definido en canal_daq, que corresponde al canal físico del DAQ donde está conectado el módulo. Luego se configura el reloj de muestreo con cfg_samp_clk_timing, estableciendo la frecuencia (frecuencia_muestreo) y el modo de adquisición como continuo (AcquisitionType.CONTINUOUS), lo que permite capturar datos sin interrupciones. Se ajusta el tamaño del buffer de entrada (input_buf_size) para que pueda almacenar la cantidad de muestras correspondientes a 5 segundos, calculado como frecuencia_muestreo * tiempo_buffer.
+Después se añade un canal analógico de voltaje usando el nombre definido en canal_daq, que corresponde al canal físico del DAQ donde está conectado el módulo. Luego se configura el reloj de muestreo, estableciendo la frecuencia muestreo y el modo de adquisición como continuo, lo que permite capturar datos sin interrupciones. Se ajusta el tamaño del buffer de entrada para que pueda almacenar la cantidad de muestras correspondientes a 5 segundos, calculado como frecuencia_muestreo * tiempo_buffer.
 
-Después, se imprime un mensaje indicando que la adquisición ha comenzado. Dentro del bloque try, se inicia un ciclo infinito (while True) que lee bloques de datos del DAQ usando tarea.read, con el tamaño definido en muestras_por_bloque, y los agrega a la lista datos_capturados mediante extend. Si el usuario interrumpe el proceso (por ejemplo, con Ctrl + C), se captura la excepción KeyboardInterrupt y se muestra un mensaje. Finalmente, en el bloque finally, se calcula el tiempo total de adquisición restando el tiempo inicial (inicio = time.time()) al tiempo actual, y se imprime en pantalla.  
+Después, se imprime un mensaje indicando que la adquisición ha comenzado. Dentro del bloque try, se inicia un ciclo infinito que lee bloques de datos del DAQ, con el tamaño definido en muestras_por_bloque, y los agrega a la lista datos_capturados. Finalmente, se calcula el tiempo total de adquisición restando el tiempo inicial al tiempo actual, y se imprime en pantalla.  
 
     with nidaqmx.Task() as tarea:
        tarea.ai_channels.add_ai_voltage_chan(canal_daq)
@@ -137,9 +137,7 @@ Después, se imprime un mensaje indicando que la adquisición ha comenzado. Dent
         tiempo_total = time.time() - inicio
         print(f"Tiempo total de adquisición: {tiempo_total:.2f} segundos")  
 
-Primero, los datos capturados se convierten en un arreglo de tipo NumPy con np.array(datos_capturados), lo que permite trabajar con ellos de forma más eficiente. Luego se genera un vector de tiempo llamado tiempo, que va desde 0 hasta la duración total de la señal, calculado como el número de muestras dividido por la frecuencia de muestreo. Este vector sirve para asociar cada muestra con su instante correspondiente en segundos.  
-
-Después se crea una figura con tamaño personalizado (figsize=(10, 4)) y se grafica la señal usando plt.plot, donde el eje X representa el tiempo y el eje Y la amplitud en voltios. Se añaden etiquetas a los ejes, un título descriptivo ("Registro EMG - Adquisición con DAQ NI") y una cuadrícula para facilitar la lectura. Finalmente, se ajusta el diseño con tight_layout() y se muestra el gráfico en pantalla con plt.show().  
+Primero, los datos capturados se convierten en un arreglo de tipo NumPy con np.array(datos_capturados), lo que permite trabajar con ellos de forma más eficiente. Luego se genera un vector de tiempo llamado tiempo, que va desde 0 hasta la duración total de la señal, calculado como el número de muestras dividido por la frecuencia de muestreo. Este vector sirve para asociar cada muestra con su instante correspondiente en segundos; después se grafica la señal de la adquisición en tiempo real.
 
 
          datos_capturados = np.array(datos_capturados)
@@ -153,15 +151,41 @@ Después se crea una figura con tamaño personalizado (figsize=(10, 4)) y se gra
          plt.grid(True)
          plt.show()
 
-Finalmente se define la ruta donde se va a guardar el archivo de texto con los datos capturados, usando una cadena formateada (f"") que incluye la frecuencia de muestreo en el nombre del archivo para identificarlo fácilmente. Luego, con np.savetxt, se guarda el arreglo datos_capturados en esa ruta como un archivo .txt. Finalmente, se imprime en consola un mensaje que confirma que el archivo fue guardado correctamente, mostrando la ruta completa.
+Finalmente se define la ruta donde se va a guardar el archivo de texto con los datos capturados, se guarda el arreglo datos_capturados en esa ruta como un archivo .txt  
 
          ruta_guardado = f"C:/Users/carlo/.spyder-py3/RegistroEMG_{frecuencia_muestreo}.txt"
          np.savetxt(ruta_guardado, datos_capturados)
          print(f"Archivo guardado en: {ruta_guardado}")
 
-La señal obtenida fue esta, se hizo un zoom ya que no era tan claro verla:
-<img width="1020" height="470" alt="image" src="https://github.com/user-attachments/assets/5470ca23-0ffa-41a7-880b-03fc6b9042d6" />
-### c. Aplicar un filtro pasa banda (20–450 Hz) para eliminar ruido y artefactos
+La señal obtenida fue esta:
+<img width="1478" height="353" alt="image" src="https://github.com/user-attachments/assets/2fc59bd6-8728-4286-ada1-cb215cf08474" />
+
+### c. Aplicar un filtro pasa banda (20–450 Hz) para eliminar ruido y artefactos  
+
+
+
+    frecuencia_muestreo = 5000 
+    tiempo = np.arange(len(senal_emg)) / frecuencia_muestreo
+
+
+
+    def crear_filtro_pasabanda(frecuencia_baja, frecuencia_alta, frecuencia_muestreo, orden=4):
+
+        frecuencia_nyquist = 0.5 * frecuencia_muestreo
+    frecuencia_baja_norm = frecuencia_baja / frecuencia_nyquist
+    frecuencia_alta_norm = frecuencia_alta / frecuencia_nyquist
+    b, a = butter(orden, [frecuencia_baja_norm, frecuencia_alta_norm], btype='band')
+    return b, a
+
+    def aplicar_filtro_pasabanda(senal, frecuencia_baja=20, frecuencia_alta=450, frecuencia_muestreo=5000, orden=4):
+
+    b, a = crear_filtro_pasabanda(frecuencia_baja, frecuencia_alta, frecuencia_muestreo, orden)
+    senal_filtrada = filtfilt(b, a, senal)
+    return senal_filtrada
+
+
+    senal_emg_filtrada = aplicar_filtro_pasabanda(senal_emg, 20, 450, frecuencia_muestreo, 4)
+
 
 
 # Parte C
