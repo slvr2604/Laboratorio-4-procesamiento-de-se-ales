@@ -157,11 +157,15 @@ Finalmente se define la ruta donde se va a guardar el archivo de texto con los d
          np.savetxt(ruta_guardado, datos_capturados)
          print(f"Archivo guardado en: {ruta_guardado}")
 
-La señal obtenida fue esta:
+La señal obtenida fue esta, se hizo zoom entre el segundo 20-22 para tener una mejor visualización:
 <img width="1478" height="353" alt="image" src="https://github.com/user-attachments/assets/2fc59bd6-8728-4286-ada1-cb215cf08474" />
 
 ### c. Aplicar un filtro pasa banda (20–450 Hz) para eliminar ruido y artefactos  
+Primero se definió la frecuencia de muestreo de la señal EMG DE 5kHz. A partir de esto, se generó un vector de tiempo que permite asociar cada muestra con su instante correspondiente, facilitando el análisis de la señal.
 
+Luego se diseñó el filtro pasabanda con el objetivo de conservar únicamente las frecuencias entre 20 Hz y 450 Hz, que son las más representativas de la actividad muscular. Para ello, se normalizaron las frecuencias de corte con respecto a la frecuencia de Nyquist y se utilizó un filtro Butterworth de cuarto orden, conocido por su respuesta suave y estable.  
+
+Posteriormente, se aplicó el filtro a la señal EMG utilizando un método de filtrado bidireccional, lo que evita distorsiones en la forma de onda.  
 
 
     frecuencia_muestreo = 5000 
@@ -172,19 +176,70 @@ La señal obtenida fue esta:
     def crear_filtro_pasabanda(frecuencia_baja, frecuencia_alta, frecuencia_muestreo, orden=4):
 
         frecuencia_nyquist = 0.5 * frecuencia_muestreo
-    frecuencia_baja_norm = frecuencia_baja / frecuencia_nyquist
-    frecuencia_alta_norm = frecuencia_alta / frecuencia_nyquist
-    b, a = butter(orden, [frecuencia_baja_norm, frecuencia_alta_norm], btype='band')
-    return b, a
+        frecuencia_baja_norm = frecuencia_baja / frecuencia_nyquist
+        frecuencia_alta_norm = frecuencia_alta / frecuencia_nyquist
+        b, a = butter(orden, [frecuencia_baja_norm, frecuencia_alta_norm], btype='band')
+        return b, a
 
     def aplicar_filtro_pasabanda(senal, frecuencia_baja=20, frecuencia_alta=450, frecuencia_muestreo=5000, orden=4):
 
-    b, a = crear_filtro_pasabanda(frecuencia_baja, frecuencia_alta, frecuencia_muestreo, orden)
-    senal_filtrada = filtfilt(b, a, senal)
-    return senal_filtrada
+        b, a = crear_filtro_pasabanda(frecuencia_baja, frecuencia_alta, frecuencia_muestreo, orden)
+        senal_filtrada = filtfilt(b, a, senal)
+        return senal_filtrada
 
 
     senal_emg_filtrada = aplicar_filtro_pasabanda(senal_emg, 20, 450, frecuencia_muestreo, 4)
+
+Finalmente se graficó con un zoom entre 20-22 segundos para mejorar la visualización:  
+    
+    plt.subplot(2,1,2)
+    plt.plot(tiempo, senal_emg_filtrada, color='purple', linewidth=0.8)
+    plt.xlim(20, 22)
+    plt.title('Señal EMG filtrada (20–450 Hz)')
+    plt.xlabel('Tiempo [s]')
+    plt.ylabel('Amplitud [V]')
+    plt.grid(True)
+    plt.show()
+
+<img width="1482" height="381" alt="image" src="https://github.com/user-attachments/assets/2619775b-672f-46cb-ab9e-c825aec4fe2b" />
+Finalmente se graficó la respuesta del filtro pasabanda Butterworth en distintas frecuencias. Primero, se crean los coeficientes del filtro utilizando la función crear_filtro_pasabanda, con un rango de paso entre 20 Hz y 450 Hz y una frecuencia de muestreo de 5000 Hz. Luego, se calcula la respuesta en frecuencia del filtro con la función freqz, que devuelve las frecuencias y la ganancia correspondiente en cada una, finalmente se grafica:  
+<img width="883" height="492" alt="image" src="https://github.com/user-attachments/assets/314f52c0-eeb3-499f-858b-126f513d6dc1" />
+
+
+### d. Dividir la señal en el número de contracciones realizadas.  
+El total de contracciones fueron 53 en 
+
+    fs = 5000    
+    duracion_total = 75.1
+    n_contracciones = 53
+
+
+    duracion_c = duracion_total / n_contracciones
+    muestras_c = int(duracion_c * fs)
+
+    t = np.arange(len(senal_emg_filtrada)) / fs
+
+    print(f"Duración por contracción: {duracion_c:.2f} s")
+    print(f"Muestras por contracción: {muestras_c}")
+
+
+    for i in range(n_contracciones):
+    inicio = i * muestras_c
+    fin = inicio + muestras_c
+    if fin > len(senal_emg_filtrada):
+        fin = len(senal_emg_filtrada)
+
+    t_seg = t[inicio:fin] - t[inicio]  # tiempo local desde 0
+    s_seg = senal_emg_filtrada[inicio:fin]
+
+    plt.figure(figsize=(8,3))
+    plt.plot(t_seg, s_seg, color='purple', linewidth=1)
+    plt.title(f'Contracción {i+1}')
+    plt.xlabel('Tiempo [s]')
+    plt.ylabel('Amplitud [V]')
+    plt.grid(True)
+    plt.show()
+
 
 
 
