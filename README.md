@@ -310,8 +310,10 @@ El total de contracciones fueron 53 en 75.1 segundos, la persona a la que se le 
 ### f. Graficar los resultados obtenidos y analizar la tendencia de la frecuencia media y mediana a medida que progresa la fatiga muscular.    
 Al inicio (en las primeras contracciones), las frecuencias están más altas; conforme avanza el número de contracciones, se observa una disminución de las frecuencias. A medida que progresa la fatiga muscular, la frecuencia mediana y la frecuencia media tienden a disminuir, lo que refleja una reducción en la velocidad de conducción de las fibras musculares activas.  
 
+
 Al inicio del registro, las frecuencias se encuentran alrededor de los 45 a 46 Hz, mientras que hacia las últimas contracciones aparecen valores más bajos, cercanos a los 41 Hz. Este descenso, aunque no es lineal ni pronunciado, indica que con el paso de las contracciones la señal del EMG tiende a desplazarse hacia frecuencias menores, reflejando el proceso fisiológico de la fatiga muscular.
 El promedio de la frecuencia media (43.42 Hz) y de la frecuencia mediana (42.84 Hz) confirma que ambas medidas son muy próximas entre sí, lo cual es esperable, ya que ambas describen el centro del espectro de potencia de la señal. Sin embargo, se nota que la frecuencia mediana tiene una variación un poco más marcada, lo que puede deberse a su mayor sensibilidad a los cambios en la distribución energética del espectro. Este comportamiento se interpreta como una reducción gradual en la velocidad de conducción de las fibras musculares activas y un mayor predominio de las fibras lentas, características del proceso de fatiga.  
+
 El desplazamiento del espectro hacia frecuencias más bajas implica que el músculo está perdiendo capacidad de generar respuestas rápidas y está entrando en un estado de menor eficiencia contráctil. Por tanto, la gráfica sugiere que a medida que aumentan las contracciones, se produce una disminución progresiva en las frecuencias características del EMG, lo que evidencia la aparición y avance de la fatiga muscular. En conclusión, tanto la frecuencia media como la mediana muestran un patrón coherente con los cambios típicos de la fatiga.  
 
 
