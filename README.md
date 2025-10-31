@@ -249,8 +249,8 @@ El total de contracciones fueron 53 en 75.1 segundos, la persona a la que se le 
 <img width="702" height="316" alt="image" src="https://github.com/user-attachments/assets/94ae1130-2559-4a9d-9efd-1c0a7b30807c" />
 
 ### e. Calcular para cada contracción:  
-- Frecuencia media  
-- Frecuencia mediana  
+- Frecuencia media: Representa el promedio ponderado de las frecuencias presentes en el espectro, según su potencia.  
+- Frecuencia mediana: Es la frecuencia que divide el espectro de potencia en dos partes iguales; es decir, la mitad de la energía total del EMG está por debajo de esa frecuencia, y la otra mitad está por encima.  
 
         fs = 5000 
         n_contracciones = 53 
