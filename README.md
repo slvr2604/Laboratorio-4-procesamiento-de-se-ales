@@ -37,9 +37,49 @@ plt.show()
 ```
 Finalmente la gráfica de la señal se observará de la siguiente forma:
 <img width="1189" height="490" alt="image" src="https://github.com/user-attachments/assets/31a397dc-db44-4332-b1e9-9adb0bab4fc0" />
-Donde se observa una contracción por segundo. Y procedemos con el procesamiento de la señal, donde usaremos librerías como `numpy`, `matplotlib.pyplot` y `pandas`.
+Donde se observa una contracción por segundo. Y procedemos con el procesamiento de la señal, donde usaremos librerías como `numpy`, `matplotlib.pyplot` y `pandas`. 
+Se comienza segmentando la señal en cinco partes, la cual se puede hacer de la siguiente forma en python:
 
+```
+segmentos_emg = np.array_split(amplitud_emg_mV, 5)
+segmentos_tiempo = np.array_split(tiempo_emg, 5)
+```
 
+Como observamos, la función `np.array_split()` segmenta el arreglo en 5 partes tanto a la amplitud como al tiempo, lo que nos permitirá analizar por separado las 5 contracciones simuladas.
+
+Y estas gráficamente se verán de la siguiente forma:
+<img width="1189" height="790" alt="image" src="https://github.com/user-attachments/assets/1e7c0735-d1e1-4e31-828c-7a9cca3e1f17" />
+Se observan las cinco contracciones musculares simuladas. Cada segmento representa una contracción independiente, lo cual nos permitió analizar el comportamiento de la señal de manera más profunda.
+Las contracciones tienen picos de amplitud bien definidos, que corresponden al momento en que se activa el músculo, tras esos picos encontramos periodos de menor actividad, que representa las fases de reposo. Esto nos indica que la segmentación que se realizó fue hecha correctamente y cada segmento contiene una contracción completa.
+Adicionalmente, se puede observar que la amplitud varía entre contracciones, teniendo unas más intensas que otras, esto puede deberse por fluctuaciones del generador biológico, también se observa cierto nivel de ruido y oscilaciones pequeñas, algo que puede resultar normal en registros EMG.
+A pesar de esto, la forma de las contracciones se mantiene similar, lo que confirma que la señal emulada tiene un comportamiento estable y representativo.
+Tras la segmentación, podremos iniciar con el cálculo de la frecuencia media y la frecuecia mediana de la señal. Que se realiza de la siguiente forma: 
+
+```
+frecuencia_media_Hz = []
+frecuencia_mediana_Hz = []
+
+for indice, contraccion in enumerate(segmentos_emg):
+    frecuencias, densidad_potencia = welch(contraccion, fs=frecuencia_muestreo_Hz, nperseg=1024)
+
+    # Calculamos frecuencia media (promedio ponderado)
+    media = np.sum(frecuencias * densidad_potencia) / np.sum(densidad_potencia)
+    frecuencia_media_Hz.append(media)
+
+    # Calculamos frecuencia mediana (mitad del área espectral)
+    mediana = frecuencias[np.where(np.cumsum(densidad_potencia) >= np.sum(densidad_potencia)/2)[0][0]]
+    frecuencia_mediana_Hz.append(mediana)
+```
+Comenzamos inicializando dos listas vacías `frecuencia_media_Hz` y `frecuencia_mediana_Hz` que se encargarán de almacenar los resultados de cada contracción. Luego, mediante un ciclo `for`, se recorrieron los cinco segmentos de la señal `segmentos_emg`, correspondientes a las contracciones simuladas.
+
+Dentro de este ciclo, se aplicó la función `welch()` de la librería `scipy.signal`, que calcula la densidad espectral de potencia (PSD) de la señal utilizando el método de Welch. Esta función nos devuelve dos arreglos: `frecuencias`, que contiene los valores de frecuencia (en Hz) y `densidad_potencia`, que muestra la potencia o energía asociada a cada frecuencia.
+
+Con estos datos, se calculó la frecuencia media como un promedio ponderado entre las frecuencias y su potencia espectral.
+Luego, se calculó la frecuencia mediana tomando en cuenta la frecuencia en la que la suma acumulativa de la potencia alcanza el 50% del total del espectro. Este punto hace que se divida el área espectral en dos partes iguales, mostrando cómo se distribuye la energía de la señal.
+Una vez analizado el código, nos arroja la tabla de frecuencia media y frecuencia mediana y además la gráfica de estas.
+<img width="686" height="394" alt="image" src="https://github.com/user-attachments/assets/78d0f093-1b61-4944-8e7f-37b57395b13b" />
+<img width="623" height="232" alt="image" src="https://github.com/user-attachments/assets/0ee8a128-20f9-4518-aea7-a231782ddfe7" />
+En la tabla se observan los valores obtenidos de frecuencia media y frecuencia mediana para las cinco contracciones musculares simuladas. Se puede observar que ambas frecuencias muestran una tendencia ascendente a medida que avanzan las contracciones. La frecuencia media inicia con un valor de aproximadamente 36.62 Hz en la primera contracción y aumenta hasta 67.41 Hz en la quinta. Esto indica que, conforme se repiten las contracciones, el contenido energético de la señal tiende a desplazarse hacia frecuencias más altas, lo que nos sugiere una mayor activación o intensidad muscular en las contracciones finales. A su vez, la frecuencia mediana pasa de 5.86 Hz en las dos primeras contracciones a 14.65 Hz en la última. Aunque los valores son menores que los de la frecuencia media, el incremento también refleja un desplazamiento del espectro hacia frecuencias más altas. Este comportamiento nos indica que es coherente con el hecho de que fue medida con un generador biológico, el cual simula mayor actividad muscular en las contracciones finales que en una medición real se asocia con la fatiga muscular.
 
 
 # Parte B  
