@@ -207,7 +207,7 @@ Finalmente se graficó la respuesta del filtro pasabanda Butterworth en distinta
 
 
 ### d. Dividir la señal en el número de contracciones realizadas.  
-El total de contracciones fueron 53 en 
+El total de contracciones fueron 53 en 75.1 segundos, la persona a la que se le tomó el exámen se le pidió apretas una botella hasta que tuviera fatiga, se graficaron todas las contracciones, pero se pondran las primeras 3 contracciones, una del medio y las tres últimas:  
 
     fs = 5000    
     duracion_total = 75.1
@@ -240,8 +240,70 @@ El total de contracciones fueron 53 en
     plt.grid(True)
     plt.show()
 
+<img width="702" height="316" alt="image" src="https://github.com/user-attachments/assets/875f8891-945a-4d30-8867-1c911734363e" />
+<img width="702" height="316" alt="image" src="https://github.com/user-attachments/assets/6c0fbb0b-35ad-4bd8-96b3-382c1b956801" />
+<img width="702" height="316" alt="image" src="https://github.com/user-attachments/assets/4f95fd4b-c698-48f7-b679-674296ce41b8" />
+<img width="702" height="316" alt="image" src="https://github.com/user-attachments/assets/4eed88f4-d717-4ffa-83f5-4a95a3975e66" />
+<img width="702" height="316" alt="image" src="https://github.com/user-attachments/assets/89a7ddc9-e8b3-43ca-8dbe-caa9a280b972" />
+<img width="702" height="316" alt="image" src="https://github.com/user-attachments/assets/ad34ebc9-ce82-4034-9bd1-d20ced6c533b" />
+<img width="702" height="316" alt="image" src="https://github.com/user-attachments/assets/94ae1130-2559-4a9d-9efd-1c0a7b30807c" />
+
+### e. Calcular para cada contracción:  
+- Frecuencia media  
+- Frecuencia mediana
+
+        fs = 5000 
+        n_contracciones = 53 
+        duracion_total = 75.1 
+        duracion_c = duracion_total / n_contracciones
+        muestras_c = int(duracion_c * fs)
+
+        frecuencias_medias = []
+        frecuencias_medianas = []
+        for i in range(n_contracciones):
+            inicio = i * muestras_c
+            fin = inicio + muestras_c
+            if fin > len(senal_emg_filtrada):
+        fin = len(senal_emg_filtrada)
+            segmento = senal_emg_filtrada[inicio:fin]
+
+  
+            N = len(segmento)
+            fft_segmento = np.fft.rfft(segmento * np.hanning(N))
+            potencia = np.abs(fft_segmento)**2
+            frecuencias = np.fft.rfftfreq(N, d=1/fs)
+
+   
+            frecuencia_media = np.sum(frecuencias * potencia) / np.sum(potencia)
 
 
+            energia_acumulada = np.cumsum(potencia)
+            energia_total = energia_acumulada[-1]
+            frecuencia_mediana = frecuencias[np.where(energia_acumulada >= energia_total/2)[0][0]]
+
+
+            frecuencias_medias.append(frecuencia_media)
+            frecuencias_medianas.append(frecuencia_mediana)
+
+        frecuencias_medias = np.array(frecuencias_medias)
+        frecuencias_medianas = np.array(frecuencias_medianas)
+
+        plt.figure(figsize=(10,5))
+        plt.plot(frecuencias_medias, 'o-', color='blue', label='Frecuencia media')
+        plt.plot(frecuencias_medianas, 'o-', color='red', label='Frecuencia mediana')
+        plt.title('Evolución de la frecuencia media y mediana por contracción')
+        plt.xlabel('Número de contracción')
+        plt.ylabel('Frecuencia [Hz]')
+        plt.grid(True)
+        plt.legend()
+        plt.show()
+
+
+        print(f"Promedio frecuencia media: {np.mean(frecuencias_medias):.2f} Hz")
+        print(f"Promedio frecuencia mediana: {np.mean(frecuencias_medianas):.2f} Hz")
+<img width="841" height="471" alt="image" src="https://github.com/user-attachments/assets/d92cf826-ff16-4187-85e6-7e43c35e6dcf" />
+**Promedio frecuencia media:** 43.42 Hz  
+**Promedio frecuencia mediana:** 42.84 Hz  
 
 # Parte C
 
