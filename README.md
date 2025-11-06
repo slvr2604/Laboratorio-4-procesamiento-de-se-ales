@@ -157,7 +157,9 @@ Finalmente se define la ruta donde se va a guardar el archivo de texto con los d
          np.savetxt(ruta_guardado, datos_capturados)
          print(f"Archivo guardado en: {ruta_guardado}")
 
-La señal obtenida fue esta, se hizo zoom entre el segundo 20-22 para tener una mejor visualización:
+La señal obtenida fue esta, en la imágen se muestra con zoom para sólo ver 30 segundos:  
+<img width="1010" height="470" alt="image" src="https://github.com/user-attachments/assets/2ca915fb-0e7b-4cf1-85fe-7f5df08cba2a" />
+Se hizo zoom entre el segundo 20-22 para tener una mejor visualización:  
 <img width="1478" height="353" alt="image" src="https://github.com/user-attachments/assets/2fc59bd6-8728-4286-ada1-cb215cf08474" />
 
 ### c. Aplicar un filtro pasa banda (20–450 Hz) para eliminar ruido y artefactos  
@@ -190,20 +192,22 @@ Posteriormente, se aplicó el filtro a la señal EMG utilizando un método de fi
 
     senal_emg_filtrada = aplicar_filtro_pasabanda(senal_emg, 20, 450, frecuencia_muestreo, 4)
 
-Finalmente se graficó con un zoom entre 20-22 segundos para mejorar la visualización:  
+Finalmente se graficó con un zoom entre 20-25 segundos para mejorar la visualización:  
     
     plt.subplot(2,1,2)
     plt.plot(tiempo, senal_emg_filtrada, color='purple', linewidth=0.8)
-    plt.xlim(20, 22)
+    plt.xlim(20, 25)
     plt.title('Señal EMG filtrada (20–450 Hz)')
     plt.xlabel('Tiempo [s]')
     plt.ylabel('Amplitud [V]')
     plt.grid(True)
     plt.show()
 
-<img width="1482" height="381" alt="image" src="https://github.com/user-attachments/assets/2619775b-672f-46cb-ab9e-c825aec4fe2b" />
+<img width="1189" height="590" alt="image" src="https://github.com/user-attachments/assets/d40aa097-17ec-48d1-8021-0a026781c433" />
+
 Finalmente se graficó la respuesta del filtro pasabanda Butterworth en distintas frecuencias. Primero, se crean los coeficientes del filtro utilizando la función crear_filtro_pasabanda, con un rango de paso entre 20 Hz y 450 Hz y una frecuencia de muestreo de 5000 Hz. Luego, se calcula la respuesta en frecuencia del filtro con la función freqz, que devuelve las frecuencias y la ganancia correspondiente en cada una, finalmente se grafica:  
-<img width="883" height="492" alt="image" src="https://github.com/user-attachments/assets/314f52c0-eeb3-499f-858b-126f513d6dc1" />
+<img width="1189" height="590" alt="image" src="https://github.com/user-attachments/assets/97e05fb4-c955-4309-9510-915be50ecf18" />
+
 
 
 ### d. Dividir la señal en el número de contracciones realizadas.  
