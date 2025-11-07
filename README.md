@@ -5,7 +5,8 @@ En el presente laboratorio se realizó la captura de señales electromiográfica
 # Diagrama de flujo.
 Como primera etapa, se elaboró un diagrama de flujo que permitió estructurar tanto la programación como el procedimiento general del análisis. Esta herramienta facilitó la organización lógica de las tareas, definiendo el orden de ejecución, las funciones necesarias y los criterios de procesamiento que se aplicarían a las señales vocales.
 
-*Insertar diagrama de flujo*
+<img width="900" height="1599" alt="image" src="https://github.com/user-attachments/assets/88b8513b-bbbd-4f14-9a60-1542edb48a8f" />
+
 # Parte A.
 La parte A se centró inicialmente en la adquisición y procesamiento de una señal de contracciones musculares simuladas, se adquirieron 5 contracciones a las cuales se les realizó el siguiente procedimiento:
 
