@@ -157,7 +157,7 @@ Finalmente se define la ruta donde se va a guardar el archivo de texto con los d
          np.savetxt(ruta_guardado, datos_capturados)
          print(f"Archivo guardado en: {ruta_guardado}")
 
-La señal obtenida fue esta, en la imágen se muestra con zoom para sólo ver 30 segundos:  
+La señal obtenida fue esta, en la imágen se muestra con zoom para sólo ver 15 segundos:  
 <img width="1010" height="470" alt="image" src="https://github.com/user-attachments/assets/2ca915fb-0e7b-4cf1-85fe-7f5df08cba2a" />
 Se hizo zoom entre el segundo 20-25 para tener una mejor visualización:  
 <img width="1285" height="303" alt="image" src="https://github.com/user-attachments/assets/590dccaa-4854-499d-866c-a5b762487383" />
