@@ -159,8 +159,9 @@ Finalmente se define la ruta donde se va a guardar el archivo de texto con los d
 
 La señal obtenida fue esta, en la imágen se muestra con zoom para sólo ver 30 segundos:  
 <img width="1010" height="470" alt="image" src="https://github.com/user-attachments/assets/2ca915fb-0e7b-4cf1-85fe-7f5df08cba2a" />
-Se hizo zoom entre el segundo 20-22 para tener una mejor visualización:  
-<img width="1478" height="353" alt="image" src="https://github.com/user-attachments/assets/2fc59bd6-8728-4286-ada1-cb215cf08474" />
+Se hizo zoom entre el segundo 20-25 para tener una mejor visualización:  
+<img width="1285" height="303" alt="image" src="https://github.com/user-attachments/assets/590dccaa-4854-499d-866c-a5b762487383" />
+
 
 ### c. Aplicar un filtro pasa banda (20–450 Hz) para eliminar ruido y artefactos  
 Primero se definió la frecuencia de muestreo de la señal EMG de 5kHz. A partir de esto, se generó un vector de tiempo que permite asociar cada muestra con su instante correspondiente, facilitando el análisis de la señal.
@@ -201,12 +202,14 @@ Finalmente se graficó con un zoom entre 20-25 segundos para mejorar la visualiz
     plt.xlabel('Tiempo [s]')
     plt.ylabel('Amplitud [V]')
     plt.grid(True)
-    plt.show()
+    plt.show()  
+    
+<img width="1276" height="319" alt="image" src="https://github.com/user-attachments/assets/d3515feb-40fb-47c1-b72e-b8223dcc8c92" />
 
-<img width="1189" height="590" alt="image" src="https://github.com/user-attachments/assets/d40aa097-17ec-48d1-8021-0a026781c433" />
 
 Finalmente se graficó la respuesta del filtro pasabanda Butterworth en distintas frecuencias. Primero, se crean los coeficientes del filtro utilizando la función crear_filtro_pasabanda, con un rango de paso entre 20 Hz y 450 Hz y una frecuencia de muestreo de 5000 Hz. Luego, se calcula la respuesta en frecuencia del filtro con la función freqz, que devuelve las frecuencias y la ganancia correspondiente en cada una, finalmente se grafica:  
-<img width="1189" height="590" alt="image" src="https://github.com/user-attachments/assets/97e05fb4-c955-4309-9510-915be50ecf18" />
+<img width="707" height="398" alt="image" src="https://github.com/user-attachments/assets/63a03c7d-98f3-432a-a3a2-302d2f78df7a" />
+
 
 
 
